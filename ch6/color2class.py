@@ -22,8 +22,8 @@ stdout_data = b_stdout_data.decode('utf-8')
 
 for image_file_name in stdout_data.rstrip().split('\n'):
     file_path = os.path.join(image_dir_path, image_file_name)
+    print('processing {}'.format(file_path))
     img = io.imread(file_path)
-    print(img.shape)
     # plt.figure()
     # io.imshow(img)
     # plt.show()
