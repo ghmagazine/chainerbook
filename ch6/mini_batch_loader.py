@@ -95,6 +95,7 @@ class DatasetPreProcessor(chainer.dataset.DatasetMixin):
             color_data = pd.read_csv(self.args.label_path)
             restoration([gt], color_data, './', index, 32)
 
+<<<<<<< HEAD
         # augmentat image
         if self.args.aug_params.do_augment:
             image, gt = self.augment_image(image, gt)
@@ -104,6 +105,16 @@ class DatasetPreProcessor(chainer.dataset.DatasetMixin):
         self.__set_image_size_in_batch(image)
 
         # image normalize
+=======
+        # augmentation
+        if self.args.aug_params.do_augment:
+            image, gt = self.augment_image(image, gt)
+
+        # バッチごとにデータサイズを統一する
+        self.__set_image_size_in_batch(image)
+
+        # 画像の正規化
+>>>>>>> 23dd86731ea147188fd490755d5fb2872295a946
         image = self.image_normalizer.GCN(image)
 
         if self.args.debug_mode:
@@ -112,9 +123,15 @@ class DatasetPreProcessor(chainer.dataset.DatasetMixin):
             io.imshow(show_image)
             plt.show()
 
+<<<<<<< HEAD
         # transpose for chainer
         image = image.transpose(2, 0, 1)
         # initialize batch counter
+=======
+        # Chainerの入力に合わせてメモリオーダーを変更
+        image = image.transpose(2, 0, 1)
+        # バッチカウンターの初期化
+>>>>>>> 23dd86731ea147188fd490755d5fb2872295a946
         self.__init_batch_counter()
 
         batch_inputs = image.astype(np.float32), np.array(gt, dtype=np.int32)
@@ -143,7 +160,11 @@ class DatasetPreProcessor(chainer.dataset.DatasetMixin):
         xh, xw = image.shape[:2]
 
         if scale is None:
+<<<<<<< HEAD
             # if scale is not difinded, calculate scale as closest multiple number.
+=======
+            # スケールの定義
+>>>>>>> 23dd86731ea147188fd490755d5fb2872295a946
             h_scale = (xh//chainer.config.user_multiple)*chainer.config.user_multiple/xh
             w_scale = (xw//chainer.config.user_multiple)*chainer.config.user_multiple/xw
             scale = h_scale, w_scale
@@ -152,7 +173,11 @@ class DatasetPreProcessor(chainer.dataset.DatasetMixin):
         elif isinstance(scale, tuple) and len(scale)>2:
             raise InvalidArgumentError
 
+<<<<<<< HEAD
         new_sz = (int(xh*scale[0]), int(xw*scale[1]))  # specification of opencv, argments is recepted (w, h)
+=======
+        new_sz = (int(xh*scale[0]), int(xw*scale[1]))
+>>>>>>> 23dd86731ea147188fd490755d5fb2872295a946
         image = transform.resize(image, new_sz, mode='constant')
 
         xh, xw = image.shape[:2]
@@ -171,6 +196,7 @@ class DatasetPreProcessor(chainer.dataset.DatasetMixin):
         do_flip_x = np.random.randint(0, 2)
         do_flip_y = np.random.randint(0, 2)
 
+<<<<<<< HEAD
         if do_flip_xy: # Transpose X and Y axis
             image = image[::-1, ::-1, :]
             gt = gt[::-1, ::-1]
@@ -178,6 +204,15 @@ class DatasetPreProcessor(chainer.dataset.DatasetMixin):
             image = image[::-1, :, :]
             gt = gt[::-1, :]
         elif do_flip_y: # Flip along X-axis
+=======
+        if do_flip_xy: # X,Y軸の反転
+            image = image[::-1, ::-1, :]
+            gt = gt[::-1, ::-1]
+        elif do_flip_x: # X軸の反転
+            image = image[::-1, :, :]
+            gt = gt[::-1, :]
+        elif do_flip_y: # Y軸の反転
+>>>>>>> 23dd86731ea147188fd490755d5fb2872295a946
             image = image[:, ::-1, :]
             gt = gt[:, ::-1]
         return image, gt,
@@ -207,6 +242,7 @@ class DatasetPreProcessor(chainer.dataset.DatasetMixin):
             return ((image.transpose(2, 0, 1) - im_mean)*factor + im_mean).transpose(1,2,0).astype(np.uint8)
         else:
             return image
+<<<<<<< HEAD
 
 
 
@@ -229,3 +265,5 @@ def restoration(result_labels, color_data, output_img_path, i_batch, n_class):
         plt.figure()
         io.imshow(img)
         plt.show()
+=======
+>>>>>>> 23dd86731ea147188fd490755d5fb2872295a946

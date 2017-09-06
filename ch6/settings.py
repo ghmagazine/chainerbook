@@ -3,8 +3,13 @@ from easydict import EasyDict as edict
 import chainer
 
 
+<<<<<<< HEAD
 # paths
 data_root_path = './chapter6_0shimax/data'
+=======
+# パスの定義
+data_root_path = './data'
+>>>>>>> 23dd86731ea147188fd490755d5fb2872295a946
 image_dir_path = os.path.join(data_root_path, 'CamSeq01')
 train_image_pointer_file_name = 'train_image_pointer'
 test_image_pointer_file_name = 'test_image_pointer'
@@ -13,9 +18,14 @@ label_path = os.path.join(data_root_path, 'label_color')
 chainer.global_config.user_multiple = 16
 model_path = os.path.join(output_path, 'model/fcn_dilated_{}.model')
 
+<<<<<<< HEAD
 # training parameters
 training_params = {
     # 'optimizer': 'RMSpropGraves',  # 'NesterovAG',
+=======
+# トレーニングパラメタ
+training_params = {
+>>>>>>> 23dd86731ea147188fd490755d5fb2872295a946
     'learning_rate': 1e-4,
     'batch_size': 20,
     'weight_decay': 0.0005,
@@ -23,6 +33,7 @@ training_params = {
     'snapshot_epochs': 5,
 }
 
+<<<<<<< HEAD
 # hand making params
 number_of_class = 32
 debug_mode = False
@@ -30,14 +41,27 @@ in_ch = 3
 gpu = -1
 
 
+=======
+# オーグメンテーションパラメタ
+>>>>>>> 23dd86731ea147188fd490755d5fb2872295a946
 augmentation_params = {'scale':[0.25, 0.5],}
 aug_flags = {'do_scale':False,
              'do_flip':True,
              'change_britghtness':False,
              'change_contrast':False}
 
+<<<<<<< HEAD
 
 # a body of args
+=======
+# その他のパラメタ
+number_of_class = 32
+debug_mode = False
+in_ch = 3
+gpu = -1
+
+# argsの定義
+>>>>>>> 23dd86731ea147188fd490755d5fb2872295a946
 train_args = \
     {
         'train': True,
@@ -75,9 +99,12 @@ test_args = \
 
 chainer.global_config.user_train_args = edict(train_args)
 chainer.global_config.user_test_args = edict(test_args)
+<<<<<<< HEAD
 
 # def get_args(args_type='train'):
 #     if args_type=='train':
 #         return edict(train_args)
 #     else:
 #         return edict(test_args)
+=======
+>>>>>>> 23dd86731ea147188fd490755d5fb2872295a946

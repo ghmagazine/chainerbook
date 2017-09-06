@@ -40,10 +40,17 @@ class Evaluator(object):
 
         true_positive = (tmp_pred==tmp_trth).sum()
         false_positive = pred_pixel_size - true_positive
+<<<<<<< HEAD
         tp_fp_fn = gt_pixel_size+pred_pixel_size-true_positive
         return gt_pixel_size, true_positive, false_positive, tp_fp_fn
 
 
+=======
+        tp_fp_fn = gt_pixel_size + pred_pixel_size - true_positive
+        print(gt_pixel_size, true_positive, false_positive, tp_fp_fn)
+        return gt_pixel_size, true_positive, false_positive, tp_fp_fn
+
+>>>>>>> 23dd86731ea147188fd490755d5fb2872295a946
     def compute_evaluation_values(self):
         self.iou_result = []
         self.ar_result = []
@@ -57,6 +64,7 @@ class Evaluator(object):
                 self.ar_result.append(0)
                 self.ap_result.append(0)
             else:
+<<<<<<< HEAD
                 self.iou_result.append(true_positive.sum()/tp_fp_fn)
                 self.ar_result.append(true_positive/gt_pixel_size)
                 self.ap_result.append(true_positive/(true_positive+false_positive))
@@ -72,6 +80,15 @@ class Evaluator(object):
         self.ar_result = np.array(self.ar_result)
         self.ap_result = np.array(self.ap_result)
         self.roc_result = np.array(self.roc_result)
+=======
+                self.iou_result.append(true_positive/tp_fp_fn)
+                self.ar_result.append(true_positive/gt_pixel_size)
+                self.ap_result.append(true_positive/(true_positive+false_positive))
+
+        self.iou_result = np.array(self.iou_result)
+        self.ar_result = np.array(self.ar_result)
+        self.ap_result = np.array(self.ap_result)
+>>>>>>> 23dd86731ea147188fd490755d5fb2872295a946
 
     def get_accuracy(self):
         return (self.masked_reduced_cpu_preditions == self.masked_cpu_truths).mean()
@@ -84,6 +101,9 @@ class Evaluator(object):
 
     def get_ap(self):
         return self.ap_result
+<<<<<<< HEAD
 
     def get_roc_curve_values(self):
         return self.roc_result
+=======
+>>>>>>> 23dd86731ea147188fd490755d5fb2872295a946
