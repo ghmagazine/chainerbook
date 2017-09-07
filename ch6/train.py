@@ -1,9 +1,5 @@
 import sys, time, os
-<<<<<<< HEAD
-import settings  # import get_args
-=======
 import settings  # 設定の読み込み
->>>>>>> 23dd86731ea147188fd490755d5fb2872295a946
 from mini_batch_loader import DatasetPreProcessor
 from fcn_squeeze_dilate import FCN
 
@@ -19,11 +15,7 @@ import math
 
 
 def prepare_dataset():
-<<<<<<< HEAD
-    # load dataset
-=======
     # データセットのロード
->>>>>>> 23dd86731ea147188fd490755d5fb2872295a946
     train_mini_batch_loader = \
         DatasetPreProcessor(chainer.global_config.user_train_args)
     train_it = chainer.iterators.SerialIterator(
@@ -32,18 +24,6 @@ def prepare_dataset():
     return train_mini_batch_loader, train_mini_batch_loader.__len__()
 
 
-<<<<<<< HEAD
-#@profile
-def main():
-    # load dataset
-    train_mini_batch_loader, train_data_size = prepare_dataset()
-    # load FCN model
-    model = FCN(chainer.global_config.user_train_args.n_class,
-                chainer.global_config.user_train_args.in_ch)
-
-    # setup
-    # optimizer = chainer.optimizers.RMSpropGraves(lr=args.training_params.learning_rate)
-=======
 def main():
     # データセットのロード
     train_mini_batch_loader, train_data_size = prepare_dataset()
@@ -52,7 +32,6 @@ def main():
                 chainer.global_config.user_train_args.in_ch)
 
     # オプティマイザーの定義
->>>>>>> 23dd86731ea147188fd490755d5fb2872295a946
     optimizer = chainer.optimizers.Adam()
     optimizer.setup(model)
     optimizer.add_hook(
@@ -89,11 +68,7 @@ def main():
         print("train mean loss {}, accuracy {}, IoU {}" \
                 .format(sum_loss/train_data_size, sum_accuracy/train_data_size,
                         sum_iou/train_data_size))
-<<<<<<< HEAD
-        # saving
-=======
         # モデルの保存
->>>>>>> 23dd86731ea147188fd490755d5fb2872295a946
         snapshot_epochs = \
             chainer.global_config.user_train_args.training_params.snapshot_epochs
         if epoch % snapshot_epochs == 0:
@@ -101,17 +76,11 @@ def main():
                 chainer.global_config.user_train_args.model_path.format(epoch))
             if not os.path.exists(stor_dir):
                 os.makedirs(stor_dir)
-<<<<<<< HEAD
-            serializers.save_npz(args.model_path.format(epoch), model)
-
-    # saving
-=======
             serializers.save_npz(
                 chainer.global_config.user_train_args.model_path.format(epoch),
                 model)
 
     # モデルの保存
->>>>>>> 23dd86731ea147188fd490755d5fb2872295a946
     serializers.save_npz(
         chainer.global_config.user_train_args.model_path.format("final"), model)
 

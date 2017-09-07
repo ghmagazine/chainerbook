@@ -6,11 +6,7 @@ from skimage import graph, data, io, segmentation, color
 from matplotlib import pyplot as plt
 
 
-<<<<<<< HEAD
-data_root_dir = './chapter5_0shimax/data'
-=======
 data_root_dir = './data'
->>>>>>> 23dd86731ea147188fd490755d5fb2872295a946
 label_table_name = 'label_color'
 image_dir = 'CamSeq01'
 image_dir_path = os.path.join(data_root_dir, image_dir)
@@ -26,16 +22,8 @@ stdout_data = b_stdout_data.decode('utf-8')
 
 for image_file_name in stdout_data.rstrip().split('\n'):
     file_path = os.path.join(image_dir_path, image_file_name)
-<<<<<<< HEAD
-    img = io.imread(file_path)
-    print(img.shape)
-=======
     print('processing {}'.format(file_path))
     img = io.imread(file_path)
->>>>>>> 23dd86731ea147188fd490755d5fb2872295a946
-    # plt.figure()
-    # io.imshow(img)
-    # plt.show()
 
     class_map = np.empty((img.shape[0], img.shape[1]), dtype='i')
     for i_row in range(len(label_table)):

@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-import sys
-sys.path.append('.chaper5_0shimax/src/')
-=======
->>>>>>> 23dd86731ea147188fd490755d5fb2872295a946
 import chainer
 from chainer import Variable
 import chainer.links as L
