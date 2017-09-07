@@ -49,7 +49,7 @@ class RAM(chainer.Chain):
         # move on n_step
         out_p.append(position.copy())
         for i in range(self.n_step):
-            position, _, predict, _ = self.forward_one_step(imgs, position, False)
+            position, _, predict, _ = self.forward_one_step(imgs, position)
             out_l.append(numpy.argmax(predict.data,axis=1))
             out_p.append(numpy.array(position.data).copy())
         return out_l, out_p
